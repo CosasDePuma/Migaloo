@@ -1,0 +1,3 @@
+[submodule "cent"]
+	path = tools/cent/origin
+	url = https://github.com/xm1k3/cent
