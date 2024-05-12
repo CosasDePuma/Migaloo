@@ -10,7 +10,7 @@ RUN /sbin/apk update && /sbin/apk add --no-cache ca-certificates && /usr/sbin/up
 FROM scratch
 COPY --from=system /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /tool /app/tool
-COPY ./origin/.cent.yaml /app/.cent.yaml
+COPY --from=builder /origin/.cent.yaml /app/.cent.yaml
 ENV HOME /app
 VOLUME ["/out"]
 ENTRYPOINT ["/app/tool", "--config", "/app/.cent.yaml", "--path", "/out"]
