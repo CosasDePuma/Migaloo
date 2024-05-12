@@ -23,6 +23,10 @@ jobs:
       matrix:
         image: '${{ fromJson(needs.iterator.outputs.images) }}'
     steps:
+      - id: 'metadata'
+        run: |
+          TAG="${{ github.actor }}/$(basename ${{ matrix.image }}):latest"
+          echo "tag=$(echo ${TAG} | tr '[:upper:]' '[:lower:]')" >> "${GITHUB_OUTPUT}"
       - uses: 'actions/checkout@v4'
         with:
           submodules: 'recursive'
@@ -35,7 +39,8 @@ jobs:
       - uses: 'docker/build-push-action@v5'
         with:
           push: true
-          tags: '${{ github.actor }}/:latest'
+          context: '${{ matrix.image }}'
+          tags: '${{ stepts.metadata.outputs.tag }}'
           
       
     
