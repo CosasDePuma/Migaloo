@@ -21,6 +21,9 @@ jobs:
     strategy:
       matrix:
         image: '${{ fromJson(needs.iterator.outputs.images) }}'
+    defaults:
+        run:
+          working-directory: '${{ matrix.image }}'
     steps:
       - uses: 'actions/checkout@v4'
         with:
