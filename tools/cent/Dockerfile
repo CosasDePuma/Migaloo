@@ -1,4 +1,5 @@
 FROM golang:alpine AS builder
+LABEL org.opencontainers.image.source="https://github.com/cosasdepuma/migaloo"
 COPY ./origin/ /origin
 WORKDIR /origin
 RUN /usr/local/go/bin/go build -o /tool .
